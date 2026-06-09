@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Invoice INV-2606-002 - Apex Digital</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 0;
+    }
+    @media print {
+      body {
+        -webkit-print-color-adjust: exact;
+      }
+    }
+    body {
+      width: 210mm;
+      height: 297mm;
+      margin: 0;
+      padding: 15mm 25mm 15mm 25mm;
+      box-sizing: border-box;
+      font-family: Arial, "Helvetica Neue", Helvetica, "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: #171717;
+      background-color: #ffffff;
+      line-height: 1.5;
+      font-size: 11.5px;
+      position: relative;
+    }
+    
+    /* Top Header Line */
+    .top-header {
+      display: flex;
+      justify-content: flex-start;
+      font-size: 7.5pt;
+      color: #737373;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+    .top-divider {
+      border-top: 1px solid #d4d4d4;
+      margin-bottom: 12px;
+    }
+    
+    /* Main Info Block */
+    .info-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 15px;
+    }
+    .consultancy-info {
+      width: 55%;
+    }
+    .consultancy-name {
+      font-size: 16pt;
+      font-weight: bold;
+      color: #171717;
+      margin-bottom: 6px;
+      white-space: nowrap;
+    }
+    .consultancy-details {
+      font-size: 8.5pt;
+      color: #737373;
+      margin-bottom: 2px;
+    }
+    
+    .document-meta {
+      width: 40%;
+      text-align: right;
+    }
+    .document-title {
+      font-size: 13pt;
+      font-weight: bold;
+      color: #525252;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .meta-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .meta-table td {
+      padding: 3px 0;
+      font-size: 8.5pt;
+    }
+    .meta-label {
+      color: #737373;
+      text-align: right;
+      padding-right: 15px;
+      width: 50%;
+    }
+    .meta-value {
+      color: #171717;
+      font-weight: bold;
+      text-align: right;
+      width: 50%;
+    }
+    
+    /* Main Divider */
+    .main-divider {
+      border-top: 1px solid #d4d4d4;
+      margin-bottom: 15px;
+    }
+    
+    /* Parties Block */
+    .parties-container {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+    .party-block {
+      width: 48%;
+    }
+    .party-header {
+      font-size: 8pt;
+      font-weight: bold;
+      color: #a3a3a3;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+    .party-title {
+      font-size: 9.5pt;
+      font-weight: bold;
+      color: #171717;
+      margin-bottom: 4px;
+    }
+    .party-detail {
+      font-size: 8.5pt;
+      color: #525252;
+      margin-bottom: 2px;
+    }
+    
+    /* Table Area */
+    .items-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 12px;
+    }
+    .items-table th {
+      border-bottom: 2px solid #525252;
+      padding: 8px 0;
+      font-size: 8pt;
+      font-weight: bold;
+      color: #525252;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .items-table td {
+      border-bottom: 1px solid #e5e5e5;
+      padding: 8px 0;
+      vertical-align: top;
+    }
+    .item-desc-col {
+      width: 80%;
+      text-align: left;
+    }
+    .item-amt-col {
+      width: 20%;
+      text-align: right;
+      font-size: 9.5pt;
+      font-weight: bold;
+      color: #171717;
+    }
+    .item-title {
+      font-size: 9.5pt;
+      font-weight: bold;
+      color: #171717;
+      margin-bottom: 4px;
+    }
+    .item-desc-en {
+      font-size: 8.5pt;
+      color: #525252;
+      margin-bottom: 2px;
+      line-height: 1.4;
+    }
+    .item-desc-zh {
+      font-size: 8pt;
+      color: #a3a3a3;
+      line-height: 1.4;
+    }
+    
+    /* Summary Block */
+    .summary-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      margin-bottom: 15px;
+    }
+    .summary-table {
+      width: 40%;
+      border-collapse: collapse;
+    }
+    .summary-table td {
+      padding: 4px 0;
+      font-size: 8.5pt;
+    }
+    .summary-label {
+      color: #737373;
+      text-align: right;
+      padding-right: 15px;
+    }
+    .summary-value {
+      color: #171717;
+      text-align: right;
+    }
+    .total-row td {
+      border-top: 1px solid #d4d4d4;
+      border-bottom: 2px double #171717;
+      padding: 8px 0;
+      font-size: 10pt;
+      font-weight: bold;
+    }
+    .total-row .summary-label {
+      color: #171717;
+    }
+    .total-row .summary-value {
+      color: #171717;
+      font-size: 11pt;
+    }
+    
+    /* Payment Instructions Block */
+    .section-title {
+      font-size: 9pt;
+      font-weight: bold;
+      color: #171717;
+      margin-bottom: 4px;
+    }
+    .payment-box {
+      background-color: rgba(250, 250, 250, 0.85);
+      border: 1px solid #e5e5e5;
+      border-radius: 6px;
+      padding: 10px 15px;
+      margin-bottom: 12px;
+    }
+    .payment-grid {
+      display: flex;
+      justify-content: space-between;
+    }
+    .payment-col {
+      width: 48%;
+    }
+    .payment-item {
+      font-size: 8.5pt;
+      color: #525252;
+      margin-bottom: 4px;
+    }
+    .payment-item strong {
+      color: #171717;
+    }
+    .payment-note-zh {
+      font-size: 7.5pt;
+      color: #a3a3a3;
+      margin-top: 5px;
+      border-top: 1px dashed #e5e5e5;
+      padding-top: 4px;
+    }
+    
+    /* Terms & Conditions Block */
+    .terms-text-en {
+      font-size: 8.5pt;
+      color: #525252;
+      margin-bottom: 2px;
+    }
+    .terms-text-zh {
+      font-size: 8pt;
+      color: #a3a3a3;
+    }
+    
+    /* Page Footer */
+    .page-footer {
+      position: absolute;
+      bottom: 12mm;
+      left: 25mm;
+      right: 25mm;
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid #e5e5e5;
+      padding-top: 8px;
+      font-size: 7.5pt;
+      color: #737373;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header -->
+  <div class="top-header">
+    REF: INV-2606-002 // DIGITAL LEAD GENERATION SYSTEM
+  </div>
+  <div class="top-divider"></div>
+
+  <!-- Consultancy Info & Document Meta -->
+  <div class="info-container">
+    <div class="consultancy-info">
+      <div class="consultancy-name">Your Consultancy: Apex Digital</div>
+      <div class="consultancy-details">IT & Digital Transformation</div>
+      <div class="consultancy-details">solutions@apex-digital.dev</div>
+      <div class="consultancy-details">https://apex-digital.dev</div>
+    </div>
+    <div class="document-meta">
+      <div class="document-title">INVOICE</div>
+      <table class="meta-table">
+        <tr>
+          <td class="meta-label">Invoice No:</td>
+          <td class="meta-value">INV-2606-002</td>
+        </tr>
+        <tr>
+          <td class="meta-label">Date of Issue:</td>
+          <td class="meta-value">June 9, 2026</td>
+        </tr>
+        <tr>
+          <td class="meta-label">Due Date:</td>
+          <td class="meta-value">Upon Receipt</td>
+        </tr>
+        <tr>
+          <td class="meta-label">Reference Quote:</td>
+          <td class="meta-value">QTG-2606-001</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="main-divider"></div>
+
+  <!-- Parties (Prepared For & Project Context) -->
+  <div class="parties-container">
+    <div class="party-block">
+      <div class="party-header">PREPARED FOR</div>
+      <div class="party-title">CASH AIM Enterprise Sdn. Bhd.</div>
+      <div class="party-detail">Attn: Lesley Chan</div>
+      <div class="party-detail">Ms-Qardh, 21B Jalan Bandar Rawang 2</div>
+      <div class="party-detail">Rawang, Selangor, Malaysia</div>
+    </div>
+    <div class="party-block">
+      <div class="party-header">PROJECT CONTEXT</div>
+      <div class="party-title">Digital Lead Generation System</div>
+      <div class="party-detail">Personal Loan Inquiry Portal</div>
+      <div class="party-detail">Bahasa Melayu</div>
+    </div>
+  </div>
+
+  <!-- Line Items Table -->
+  <table class="items-table">
+    <thead>
+      <tr>
+        <th class="item-desc-col">DESCRIPTION</th>
+        <th class="item-amt-col">AMOUNT (RM)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="item-desc-col">
+          <div class="item-title">Growth Package (50% Balance)</div>
+          <div class="item-desc-en">Remaining 50% balance for development & deployment of high-converting, mobile-optimized landing page, WhatsApp routing, lead capture form, Google Sheets integration, and Edge CDN.</div>
+          <div class="item-desc-zh">尾款 50%：开发与部署高转化率、针对手机优化的网页，包括销售团队 WhatsApp 路由、客户信息收集表单、谷歌表格自动化集成与 Edge CDN 极速加速。</div>
+        </td>
+        <td class="item-amt-col">1,400.00</td>
+      </tr>
+      <tr>
+        <td class="item-desc-col">
+          <div class="item-title">Standard Care (Yearly Maintenance)</div>
+          <div class="item-desc-en">1st Year Maintenance Plan (June 2026 - June 2027). Includes custom domain renewal, secure SSL certificate, premium cloud hosting, and guaranteed 99.9% uptime.</div>
+          <div class="item-desc-zh">标准维护（首年：2026年6月 - 2027年6月）：包括定制域名续费、安全 SSL 证书、优质云托管，并保证 99.9% 的正常运行时间。</div>
+        </td>
+        <td class="item-amt-col">500.00</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Summary Area -->
+  <div class="summary-container">
+    <table class="summary-table">
+      <tr>
+        <td class="summary-label">Subtotal:</td>
+        <td class="summary-value">RM 1,900.00</td>
+      </tr>
+      <tr>
+        <td class="summary-label">SST / Tax (0%):</td>
+        <td class="summary-value">RM 0.00</td>
+      </tr>
+      <tr class="total-row">
+        <td class="summary-label">Total Due Now:</td>
+        <td class="summary-value">RM 1,900.00</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Payment Instructions -->
+  <div class="section-title">01. Payment Instructions (付款方式)</div>
+  <div class="payment-box">
+    <div class="payment-grid">
+      <div class="payment-col">
+        <div class="payment-item"><strong>Bank Name:</strong> United Overseas Bank (Malaysia) Bhd</div>
+        <div class="payment-item"><strong>Account Name:</strong> john tan yu quan</div>
+      </div>
+      <div class="payment-col">
+        <div class="payment-item"><strong>Account Number:</strong> 257 310 7820</div>
+        <div class="payment-item"><strong>Payment Reference:</strong> INV-2606-002</div>
+      </div>
+    </div>
+    <div class="payment-note-zh">
+      * 请在电子银行转账（GIRO / DuitNow）时注明发票号 <strong>INV-2606-002</strong> 作为付款备注，并将付款凭证发送至 solutions@apex-digital.dev。
+    </div>
+  </div>
+
+  <!-- Terms & Conditions -->
+  <div class="section-title">02. Terms & Conditions (条款与条件)</div>
+  <div class="terms-text-en">
+    <strong>Payment Terms:</strong> A 50% non-refundable deposit is required to commence work. The remaining 50% balance is due upon customer satisfaction with the demo shared.
+  </div>
+  <div class="terms-text-zh">
+    (付款方式：需支付 50% 不可退还的首期订金以启动项目，剩余 50% 尾款于客户对演示版满意后支付。)
+  </div>
+
+  <!-- Page Footer -->
+  <div class="page-footer">
+    <div>CONFIDENTIAL // APEX DIGITAL</div>
+    <div>Page 1 of 1</div>
+  </div>
+
+</body>
+</html>
