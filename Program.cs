@@ -11,8 +11,8 @@ class Program
     static void Main(string[] args)
     {
         // Default paths relative to the executable or output folder
-        string srcPath = args.Length > 0 ? args[0] : "../../../Apex_Digital_Quotation_Lead_Gen_v8.pdf";
-        string destPath = args.Length > 1 ? args[1] : "../../../Apex_Digital_Quotation_Lead_Gen_v8_temp.pdf";
+        string srcPath = args.Length > 0 ? args[0] : "../../../Apex_Digital_QTG-2606-001_Quotation.pdf";
+        string destPath = args.Length > 1 ? args[1] : "../../../Apex_Digital_QTG-2606-001_Quotation_temp.pdf";
 
         if (!File.Exists(srcPath))
         {
