@@ -1,0 +1,14 @@
+# Build outputs
+[Bb]in/
+[Oo]bj/
+
+# IDE files
+.vs/
+*.user
+*.suo
+*.sln.docstates
+
+# OS files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
